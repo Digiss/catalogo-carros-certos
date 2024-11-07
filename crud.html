@@ -6,20 +6,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,400;0,700;1,200;1,800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/button.css">
-    <link rel="stylesheet" href="css/records.css">
-    <link rel="stylesheet" href="css/modal.css">
+    <link rel="stylesheet" href="css/stylescrud.css">
     <script src="main.js" defer></script>
     <title>CRUD</title>
 </head>
-<body>
+<body onload="updateTable()">
     <header>
-        <h1 class="header-title">Cadastro de Clientes</h1>
+        <div class="content">
+            <nav>
+              <p class="brand"><img src="images/logo.png" alt="brand"></p>
+              <ul>
+                <li><a href="index.html">Catalog</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#feature">Registro de clientes</a></li>
+                <button>Login</button>
+              </ul>
+            </nav>
+        </div>
     </header>
     <main>
         <button type="button" class="button blue mobile" id="cadastrarCliente">Cadastrar Cliente</button>
-        <table class="records">
+        <div class="search-container">
+            <input type="text" id="search" placeholder="Pesquisar por nome, e-mail, celular ou cidade..." oninput="handleInput()" onkeydown="checkEnter(event)">
+        </div>
+        
+        <table id="tableClient"  class="records">
             <thead>
                 <tr>
                     <th>Nome</th>
@@ -30,36 +41,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Maria</td>
-                    <td>maria@gmail.com</td>
-                    <td>(11) 97165-1111</td>
-                    <td>Anapolis</td>
-                    <td>
-                        <button type="button" class="button green">editar</button>
-                        <button type="button" class="button red">excluir</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>João Pedro</td>
-                    <td>joao@gmail.com</td>
-                    <td>(11) 97165-2222</td>
-                    <td>Jandira</td>
-                    <td>
-                        <button type="button" class="button green">editar</button>
-                        <button type="button" class="button red">excluir</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Jose da Silva</td>
-                    <td>jose@gmail.com</td>
-                    <td>(11) 97165-3333</td>
-                    <td>São Roque</td>
-                    <td>
-                        <button type="button" class="button green">editar</button>
-                        <button type="button" class="button red">excluir</button>
-                    </td>
-                </tr>
+             
             </tbody>
         </table>
         <div class="modal" id="modal">
@@ -68,21 +50,63 @@
                     <h2>Novo Cliente</h2>
                     <span class="modal-close" id="modalClose">&#10006;</span>
                 </header>
-                <form class="modal-form">
-                    <input type="text" class="modal-field" placeholder="Nome do Cliente">
-                    <input type="email" class="modal-field" placeholder="e-mail do Cliente">
-                    <input type="text" class="modal-field" placeholder="Celular do Cliente">
-                    <input type="text" class="modal-field" placeholder="Cidade do Cliente">
+                <form id="form" class="modal-form">
+                    <input type="text"  id="nome" data-index="new" class="modal-field" placeholder="Nome do Cliente" required>
+                    <input type="email"  id="email"  class="modal-field" placeholder="e-mail do Cliente" required>
+                    <input type="text"  id="celular"  class="modal-field" placeholder="Celular do Cliente" required>
+                    <input type="text"  id="cidade"  class="modal-field" placeholder="Cidade do Cliente" required>
                 </form>
                 <footer class="modal-footer">
-                    <button class="button green">Salvar</button>
-                    <button class="button blue">Cancelar</button>
+                    <button id="salvar" class="button green">Salvar</button>
+                    <button id="Cancelar" class="button blue">Cancelar</button>
                 </footer>
             </div>
         </div>
     </main>
+
+    <section class="about" id="about">
+        <div class="content">
+          <div class="about-content" >
+            <div class="left">
+              <img src="images/sketchcerto.jpg" id="superabout" alt="About" />
+              
+            </div>
+            
+            <div class="right">
+              <h3 id="lorem1">
+                <p id="aboutus">About us:</p>
+                <hr>
+                  
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis, facilis. Incidunt provident molestiae minus, consequatur, quia facere amet ut voluptatibus fugit aperiam quasi odio maxime illum quod sit placeat architecto magnam voluptates unde nisi ullam quos dolores saepe quas. Iure neque minus tempora quae numquam laborum ut aliquam ab possimus illo reprehenderit fugit culpa eveniet eum deleniti at facilis facere iusto pariatur quo repellendus cum dignissimos, amet ratione! Provident accusantium iure maxime consequatur porro quo dolorum odio? Nam perferendis perspiciatis necessitatibus maiores blanditiis saepe! Cumque quod totam in optio, quo animi? Totam, obcaecati nam dolores eius beatae aliquid vitae sed?</h3>
+              <p>
+                
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+  
     <footer>
-        Copyright &copy; Prof. Fernando Leonid
+        <div class="main">
+            <div class="content footer-links">
+              <div class="footer-social">
+                <h4>Stay connected</h4>
+                <div class="social-icons">
+                  <a href="https://www.instagram.com/digisss01"><img src="images/instagram.png" alt="Instagram" /></a>
+                  
+                  <a href="https://www.facebook.com/zuck/?locale=pt_BR"><img src="images/facebook.png" alt="Facebook" /></a>
+    
+                </div>
+              </div>
+              <div class="footer-contact">
+                <h4>Contact US</h4>
+                <h6>+55 XX 9887XXX55</h6>
+                <h6>gustavo7234.mf@gmail.com</h6>
+                <h6>Alguma Rua Aí, Colombo, Paraná</h6>
+              </div>
+            </div>
+          </div>
+          <div class="last">Feito por <strong>: Gustavo M. Fernandes </strong></div>    
     </footer>
 </body>
 </html>
